@@ -11,10 +11,10 @@ class FormService
 
     /**
      * @param array $array
-     * @return void
+     * @return mixed
      * @throws Exception
      */
-    public function saveForm(array $array): void
+    public function saveForm(array $array): Form
     {
         try {
             $sectors = $array['sectors'];
@@ -25,12 +25,17 @@ class FormService
             foreach ($sectors as $sector) {
                 $form->sectors()->attach($sector);
             }
+
+            // get uuid
+            $form->refresh();
         } catch (Exception $e) {
             Log::error('Failed to save form correctly', [
                 'message' => $e->getMessage()
             ]);
             throw new Exception('Failed to save form correctly');
         }
+
+        return $form;
     }
 
     /**

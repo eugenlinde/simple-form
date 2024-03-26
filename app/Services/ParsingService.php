@@ -8,6 +8,10 @@ use DOMElement;
 
 class ParsingService
 {
+    /**
+     * @param $html
+     * @return void
+     */
     public function parseAndInsertHtml($html): void
     {
         $dom = new DOMDocument();
@@ -17,6 +21,11 @@ class ParsingService
         $this->parseAndInsertOptgroupsRecursive($select->childNodes);
     }
 
+    /**
+     * @param $nodes
+     * @param $parentId
+     * @return void
+     */
     protected function parseAndInsertOptgroupsRecursive($nodes, $parentId = null): void
     {
         foreach ($nodes as $node) {
@@ -36,6 +45,12 @@ class ParsingService
         }
     }
 
+    /**
+     * @param $label
+     * @param $parentId
+     * @param $type
+     * @return Sector
+     */
     protected function insertSector($label, $parentId = null, $type = 'option'): Sector
     {
         $existingSector = Sector::where('name', $label)

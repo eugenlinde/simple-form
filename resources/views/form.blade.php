@@ -16,6 +16,9 @@
             @if (session('success'))
                 <div>{{ session('success') }}</div>
             @endif
+            @if (session('error'))
+                <div>{{ session('error') }}</div>
+            @endif
             <div>
                 <label for="name">
                     <div>Name</div>
